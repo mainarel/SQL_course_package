@@ -98,6 +98,15 @@ order by value DESC
 limit 5;
 
 #9.13.13
-
+insert into orders_details values (13, 2);
+delete from orders_details where product_id = 4 and order_id = 13;
 
 #9.13.14
+select shops.name as shop, sum(stock.quantity) as quantity from shops
+left join stock on stock.shop_id = shops.id
+left join models on models.id = stock.model_id
+left join colors on colors.id = stock.color_id
+where models.vendor_code = 'EN1345' and stock.size = 39 and colors.id = 7
+group by shops.id
+having quantity > 0
+order by quantity;
